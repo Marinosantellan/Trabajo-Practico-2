@@ -28,40 +28,4 @@ vicio de "programacion" --> contaminar el pseudocódigo con lenguage C.
 A la hora de hacer la comparación, vamos a asumir que en la mayoría de los casos los nombres van a diferir en las primeras letras. Es por esto,
 que a la hora de definir los tipos de datos del ADT_Track_t se estableció que sean arreglos de caracteres pues facilita las cosas al imprimir.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ADT_Vector: Pedimos poca memoria con el primer malloc, solo para arrancar, despues con una estrategia de incrementacion geoemetrica satisfacemos los nuevos pedidos, esta bueno porque va creciendo segun la necesidad hasta abastecerla por completo.
