@@ -1,0 +1,166 @@
+DEFINICIONES DE TIPOS DE DATOS ABSTRACTOS 
+
+ADT_Vector_t
+
+
+Representación;
+
+Arreglo de punteros a un dato, donde el dato QUE TE IMPORTA QUE ES REY! es un TDA que almacena el indice de un archivo MP3.
+
+Tiene un tamaño real que es cuanta memoria ocupa y un tamaño efectivo que indica cuanta memoria de esta, está utilizada
+
+Primitivas:
+
+-Crear un vector
+{
+	lo crea con INIT_CHOP espacios.
+}
+
+-Destruir un vector
+{
+	necesita un setter.	
+}
+
+-Agrandar un vector
+{
+	con X estrategia de crecimiento.
+}
+
+-Ordenar un vector (de mayor a menor)
+{
+	SETTER PARA EL COMPARADOR	
+}
+-Extraer elemento de un vector.
+
+-Eliminar elemento de un vector (x posicion).
+
+-Cargar un elemento al final del arreglo. 
+
+-Cargar un elemento en cualquier posicion.
+
+-Obtener el tamaño del vector.
+
+-Exportar como file.random .
+
+
+ADT_Track_t
+[
+	es una estructura con el indice de un archivo .mp3
+				-> song_title  "string"
+	            -> artist "string"
+	            -> year   "size_t"
+	            -> genre "size_t"
+	            -> comment "string"
+
+]
+	Primitivas:	
+			 ADT_Track_create(ADT_Track_t **)
+			[
+				crea la estructura, e inicializa a NULL;
+			]
+	
+			ADT_Track_delete(ADT_Track_t **)
+			[
+				destruye los datos, destruye el contenedor;
+			]
+
+			ADT_Track_load(ADT_Track_t **; FILE* fi)
+			[
+				toma los 128 bytes
+
+			]
+
+			ADT_Track_compare_by_genre(ADT_Track_t **, ADT_Track_t**)
+			[
+				recibe los ADT_Track, compara y devuelve por nombre si es mayor o menor.
+			]
+
+			ADT_Track_compare_by_name(ADT_Track_t **, ADT_Track_t**);
+			ADT_Track_compare_by_artist(ADT_Track_t **, ADT_Track_t**);
+			ADT_Track_compare_by_title(ADT_Track_t **, ADT_Track_t**);
+			ADT_Track_compare_by_year(ADT_Track_t **, ADT_Track_t**);
+
+			ADT_Track_export_as_CSV(ADT_Track **);
+			ADT_Track_export_as_XML(ADT_Track **);
+
+
+}
+
+ADT_Error
+{
+	Es un diccionario de errores, tendra funcionalidad de ser multilenguaje.
+
+	Tendra distintos simbolos y cada uno de ellos estara asociado a un mensaje de error correspondiente.
+
+	primitivas:
+
+		Crear 
+
+		Mostrar un error por pantalla
+
+}
+
+typedef struct{
+	
+	char * song_title;
+	char * 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CLASE 01 DE AGOSTO EXPLICA TP AL MINUTO 2:19:59 APROX
+
+NECESITARIAMOS UN TERCER TDA PARA EL DICCIONARIO DE TIPOS DE GENERO MP3
+
+UNA PARTE DE INVOCACION 
+
+MP3_PROCESSOR (DONDE PROCESAMOS LOS DATOS)
+
+UTILS.C
+
+MP3.C.H
+
+VECTOR.C.H
+
+CONFIG.C.H O SETUP.C.H QUE CARAJOS QUISO DECIR!?
+
+
+...ENTRE OTRESS...
+
+PENSAR Y HACER DIAGRAMA FUNCIONAL ANTES DE CODIFICAR ASI VEMOS SI ESTA BUENO O ES UN DESASTRE LO QUE PENSAMOS
+
+LOS APRENDIZAJES Y CAMBIOS DE RUMBOS DURANTE EL LABURO VAN EN LA CONCLUSION
+QUE RESULTO MAS DIFICIL, QUE VICIOS DE PROGRAMACION COMETIMOS
+SON MEMORIAS DE INGENIERIA
+
+
+
+
+
+
+
+
+
+
+
+
+
