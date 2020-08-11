@@ -1,0 +1,49 @@
+
+process_mp3(char* argv[], ADT_Vector_t** , format_t* , FILE* )
+{
+	
+	load_mp3( char* argv[] , ADT_Vector_t**);
+
+	ADT_Vector_sort( ADT_Vector) Ordenar los elementos del vector por (metodo de ordenamiento)
+	{
+
+	};
+
+	Vector_export( ADT_Vector , format_t )Imprimir los elementos ordenados en (formato indicado)
+	{
+		ADT_Vector_export_as_CSV(ADT_Vector);
+		ADT_Vector_export_as_XLM(ADT_Vector);
+	}
+
+
+	
+	}//ACA YA TENEMOS EL VECTOR CON TODOS LOS INDICES MP3 CARGADOS PEERFECTOOO REY.
+
+	load_mp3( char* argv[] , ADT_Vector_t**)
+	{
+
+		adt_track *pointer;
+
+		CICLO(para cada argv)
+		{
+
+			abrir el archivo iesimo en modo binario 		
+
+			si (la memoria efectiva == memoria real)
+			{	
+				agrandar el vector
+			}
+
+			crear el track iesimo (crea un dato tipo ADT_Track que está en memoria dinamica, y no esta inicializado)
+
+			obtener el indice y guardarlo en el track_t recién creado (primitiva de track_adt)
+
+			cargar el track en la posicion iesima del vector
+
+			incrementar largo efectivo del vector
+
+		}
+
+	}
+
+

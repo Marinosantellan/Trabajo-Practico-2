@@ -1,0 +1,67 @@
+Discusión:
+
+Pedir tanta memoria como necesitemos (osea argc elementos) es acoplar los detalles del ADT_vector a esta implementacion en particular.
+
+Nos debatimos que conviene mas si que al crear el arreglo este se incialize en nulo y luego tener que llamar si o si a la funcion de expansion deel vector para hacer lugar, lo cual no nos convencia porque si usabamos el realloc estaria siempre creciendo a la misma tasa, medio flojo, y si usabamos un malloc para lugo un realloc bueno, ese malloc podria ir en la de creacion y asi quizas ahorrarnos una llamada a una función.
+
+Es por esto que creemos que la opcion mas viable es que al crear el vector lo de ya con un poco de memoria.
+
+Otra opcion seria que te lo de vacio y que vos puedas decirle cuanto necesitas al llamar a la primitiva de expansión.
+
+Como cargamos toda la informacion de los archivos mp3 ? y como la guardamos en un vector?
+
+No es posible o si lo es no sabemos como hacer para crear una cantidad desconocida de datos "track_t"
+
+La mejor forma de hacerlo que se nos ocurrio por ahora es usar un puntero auxiliar, cargar el track y guardarlo en el vector al mismo tiempo, siempre usando un solo puntero auxiliar, y todo dentro de un mismo ciclo iterativo.
+
+Dejar el alloc_size dentro de la estructura principal del TDA_Vector sacrifica un poco de memoria pero es clave para la funcionalidad del TDA.
+
+Tambien decidimos que se cree con memoria e inicialize todo a cero,es una banda de laburo el que hace pero esta bueno para ahorrarse laburo despues y ya poder empezar a laburar de una.
+
+ta re gede la cosa pa ponerse a pensar en el orden de los CLA 
+
+Estamos por terminar la estructuración del main y fue alto laburo...
+
+
+vicio de "programacion" --> contaminar el pseudocódigo con lenguage C.
+
+A la hora de hacer la comparación, vamos a asumir que en la mayoría de los casos los nombres van a diferir en las primeras letras. Es por esto,
+que a la hora de definir los tipos de datos del ADT_Track_t se estableció que sean arreglos de caracteres pues facilita las cosas al imprimir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

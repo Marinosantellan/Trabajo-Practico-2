@@ -1,0 +1,56 @@
+
+
+
+
+void (*printers[]) ( const ADT_Track_t , FILE* 	) = 
+{
+	print_csv,
+	print_xml
+};
+
+print_csv = ADT_Track_export_as_csv;
+
+typedef enum = 
+{
+	FMT_CSV,
+	FMT_XML
+}	format_t;
+
+typedef enum = 
+{
+	SORT_MODE_ARTIST,
+	SORT_MODE_GENRE,
+	SORT_MODE_NAME,
+	SORT_MODE_YEAR
+} smode_t;
+
+main()
+{
+
+	status_t st;
+	comparator_t cmp_mode;
+	printer_t 	 print_mode;
+	destructor_t destructor;
+	ADT_Vector_t *vector;
+	FILE*	foutput; 
+
+	validate_cla();
+
+	process_input( char* argv[] , comparator_t *fcomparator , printer_t *fprint);
+
+	Abrir_archivo();
+		
+	ADT_Vector_create(ADT_Vector_t**);	
+
+	Set_vector_config(ADT_Vector_t* , printer_t* , comparator_t* , destructor_t* );
+
+	process_mp3(char* argv[], ADT_Vector_t** , format_t* , FILE* );
+
+	Destruir_vector;
+
+	Cerrar_archivo;
+	
+	
+	return EXIT_SUCCESS;
+
+}
