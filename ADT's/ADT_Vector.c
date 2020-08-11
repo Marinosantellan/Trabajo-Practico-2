@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define INIT_SIZE 1000
+#define INIT_SIZE 100
 
 typedef struct
 {
