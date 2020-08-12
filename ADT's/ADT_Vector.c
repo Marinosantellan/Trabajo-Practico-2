@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-a
+
 typedef enum 
 {
 	ERROR_NULL_POINTER,
