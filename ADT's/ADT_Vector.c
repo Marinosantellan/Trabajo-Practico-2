@@ -56,7 +56,7 @@ status_t ADT_Vector_create( ADT_Vector_t **vector)
 
 	return OK;
 }
-
+/*Que pasa si llamamos a esta funcion para poner en nulo a un vector que ya esta destruido???*/
 status_t ADT_Vector_destroy(ADT_Vector_t **vector) 
 {
 	size_t i;
@@ -71,7 +71,7 @@ status_t ADT_Vector_destroy(ADT_Vector_t **vector)
 		destructor(((*vector)->heap)[i]);
 	}
 
-	free(heap);
+	free((*vector)->heap);
 
 	free(*vector); 
 	*vector = NULL;
