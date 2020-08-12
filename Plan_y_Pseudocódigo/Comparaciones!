@@ -1,0 +1,7 @@
+Para diseñar estas funciones ponemos como prioridad numero 1 a la robustez del programa, queremos poder recibir cualquier nombre de archivo y que la lista quuede
+bien ordenada. Para hacer esto asumimos que el prgroama sera corrido en maquinas potentes, ya que el numero de procesos por cada comparacion no es despreciable
+este es el sacrificio de eficiencia que hacemos para lograr una mayor robuztes.
+
+
+Ordenamos los numeros de menor a mayor y las letras de la A a la -> Z
+Las mayusculas son consideras menores que las minusculas, o sea de MAY a MIN.
