@@ -167,7 +167,7 @@ int str_compare(const char *str_1, const char *str_2)
 	return 0;
 }
 
-status_t ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo)
+status_t ADT_Track_print_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo)
 {
 	if(track == NULL || fo == NULL)
 	{
@@ -179,7 +179,7 @@ status_t ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE
 	return OK;
 }
 
-status_t ADT_Track_export_as_XML(ADT_Track_t *track, FILE *fo )
+status_t ADT_Track_print_as_XML(ADT_Track_t *track, FILE *fo )
 {	
 	if(track == NULL || fo == NULL)
 	{
