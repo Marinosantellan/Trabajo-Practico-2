@@ -3,11 +3,11 @@
 #include <ctype.h>
 #include <string.h>
 
-#define MP3_HEADER_SIZE 	128
-#define NUL			'\0'
+#define MP3_HEADER_SIZE 		128
+#define NUL 				    '\0'
 
-#define PREFIJO_START_TAG 	0
-#define PREFIJO_SPAN_TAG 	3	
+#define PREFIJO_START_TAG 		0
+#define PREFIJO_SPAN_TAG 		3	
 
 #define PREFIJO_START_TITLE   	3
 #define PREFIJO_SPAN_TITLE   	30
@@ -27,15 +27,7 @@
 #define PREFIJO_START_GENRE     127
 #define PREFIJO_SPAN_GENRE     	1
 
-#define CHAR_GAP		32
-
-typedef enum
-{
-	OK,
-	ERROR_NULL_POINTER,
-	ERROR_NO_MEMORY
-
-}status_t;
+#define CHAR_GAP				32
 
 typedef struct 
 {
@@ -49,9 +41,22 @@ typedef struct
 
 }ADT_Track_t;
 
+typedef enum
+{
+	OK,
+	ERROR_NULL_POINTER,
+	ERROR_NO_MEMORY
+
+}status_t;
+
+
 /****************************PROTOTYPES****************************/
 
+
+
 int str_compare(const char *str_1, const char *str_2);
+
+
 
 /****************************PROTOTYPES****************************/
 
@@ -66,7 +71,6 @@ status_t ADT_Track_create(ADT_Track_t **track)
 	{
 		return ERROR_NO_MEMORY;
 	}
-
 	return OK;
 }
 
@@ -79,8 +83,22 @@ status_t ADT_Track_destroy(ADT_Track_t **track)
 
 	free(*track);
 	*track = NULL;
-	
+
 	return OK;
+}
+
+/*Primitiva que recibe dos ADT_Track_t e implementando lógicas de ordenamiento lexicográfico, devuelve*/
+/* distintos valores si la cadena del cprimer argumento es de mayor, menor, o igual que la otra. Los valores*/
+/*serán 1, -1 y 0 respectivamente. */
+
+int ADT_Track_compare_by_title(const ADT_Track_t *track_1, const ADT_Track_t *track_2)   
+{
+	if( track_1 == NULL || track_2 == NULL)
+	{
+		return ERROR_NULL_POINTER;
+	}
+
+	return str_compare(track_1->title, track_2->title); 
 }
 
 status_t ADT_Track_load(ADT_Track_t *track, FILE* fi)
@@ -120,21 +138,6 @@ status_t ADT_Track_load(ADT_Track_t *track, FILE* fi)
     memcpy(&(track->genre),header+PREFIJO_START_GENRE,PREFIJO_SPAN_GENRE);
 
     return OK;
-}
-
-
-/*devuelve*/
-/* distintos valores si la cadena del cprimer argumento es de mayor, menor, o igual que la otra. Los valores*/
-/*serán 1, -1 y 0 respectivamente. */
-
-int ADT_Track_compare_by_title(const ADT_Track_t *track_1, const ADT_Track_t *track_2)   
-{
-	if( track_1 == NULL || track_2 == NULL)
-	{
-		return ERROR_NULL_POINTER;
-	}
-
-	return str_compare(track_1->title, track_2->title); 
 }
 
 /*
