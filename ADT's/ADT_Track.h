@@ -52,7 +52,7 @@ int 		ADT_Track_compare_by_year(const ADT_Track_t *track_1, const ADT_Track_t *t
 int 		str_compare_optimized(const char *str_1, const char *str_2);
 status_t 	ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo);
 status_t 	ADT_Track_export_as_XML(ADT_Track_t *track, FILE *fo );
-int 		str_compare(const char *str_1, const char *str_2);
+
 
 typedef enum
 {
