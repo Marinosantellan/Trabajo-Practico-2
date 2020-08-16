@@ -1,29 +1,33 @@
-#ifndef TRACK
-#define TRACK
+#ifndef TRACK_H
+#define TRACK_H
 
 #define MP3_HEADER_SIZE 		128
 #define NUL						'\0'
+#define HT 					    '\t'	
 
-#define PREFIJO_START_TAG 		0
-#define PREFIJO_SPAN_TAG 		3	
+#define INDEX_START_TAG 		0
+#define INDEX_SPAN_TAG 			3	
 
-#define PREFIJO_START_TITLE   	3
-#define PREFIJO_SPAN_TITLE   	30
+#define INDEX_START_TITLE   	3
+#define INDEX_SPAN_TITLE   		30
 
-#define PREFIJO_START_ARTIST  	33
-#define PREFIJO_SPAN_ARTIST  	30
+#define INDEX_START_ARTIST  	33
+#define INDEX_SPAN_ARTIST  		30
 
-#define PREFIJO_START_ALBUM   	63
-#define PREFIJO_SPAN_ALBUM   	30
+#define INDEX_START_ALBUM   	63
+#define INDEX_SPAN_ALBUM   		30
 
-#define PREFIJO_START_YEAR     	93
-#define PREFIJO_SPAN_YEAR     	4
+#define INDEX_START_YEAR     	93
+#define INDEX_SPAN_YEAR      	4
 
-#define PREFIJO_START_COMMENT  	97
-#define PREFIJO_SPAN_COMMENT  	30
+#define INDEX_START_COMMENT  	97
+#define INDEX_SPAN_COMMENT   	30
 
-#define PREFIJO_START_GENRE     127
-#define PREFIJO_SPAN_GENRE     	1
+#define INDEX_START_GENRE    	127
+#define INDEX_SPAN_GENRE     	1
+
+#define TRACK_FIRST_BRANCH_TAB 	'\t'
+
 
 #define TAG_START_TRACK			"<track>"
 #define TAG_END_TRACK 			"</track>"
@@ -41,18 +45,7 @@
 #define TAG_END_YEAR 			"</year>"
 
 #define CHAR_GAP				32
-
-status_t 	ADT_Track_create(ADT_Track_t **track);
-status_t 	ADT_Track_destroy(ADT_Track_t **track);
-status_t 	ADT_Track_load(ADT_Track_t *track, FILE* fi);
-int 		ADT_Track_compare_by_title(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
-int 		ADT_Track_compare_by_artist(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
-int 		ADT_Track_compare_by_album(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
-int 		ADT_Track_compare_by_year(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
-int 		str_compare_optimized(const char *str_1, const char *str_2);
-status_t 	ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo);
-status_t 	ADT_Track_export_as_XML(ADT_Track_t *track, FILE *fo );
-
+#define AUX_SIZE 				15
 
 typedef enum
 {
@@ -62,134 +55,32 @@ typedef enum
 
 }status_t;
 
-char *genre[] =
+typedef struct 
 {
-"Blues",
-"Classic Rock",
-"Country",
-"Dance",
-"Disco",
-"Funk",
-"Grunge",
-"Hip-Hop",
-"Jazz",
-"Metal",
-"New Age",
-"Oldies",
-"Other",
-"Pop",
-"R&B",
-"Rap",
-"Reggae",
-"Rock",
-"Techno",
-"Industrial",
-"Alternative",
-"Ska",
-"Death Metal",
-"Pranks",
-"Soundtrack",
-"Euro-Techno",
-"Ambient",
-"Trip-Hop",
-"Vocal",
-"Jazz+Funk",
-"Fusion",
-"Trance",
-"Classical",
-"Instrumental",
-"Acid",
-"House",
-"Game",
-"Sound Clip",
-"Gospel",
-"Noise",
-"AlternRock",
-"Bass",
-"Soul",
-"Punk",
-"Space",
-"Meditative",
-"Instrumental Pop",
-"Instrumental Rock",
-"Ethnic",
-"Gothic",
-"Darkwave",
-"Techno-Industrial",
-"Electronic",
-"Pop-Folk",
-"Eurodance",
-"Dream",
-"Southern Rock",
-"Comedy",
-"Cult",
-"Gangsta",
-"Top 40",
-"Christian Rap",
-"Pop/Funk",
-"Jungle",
-"Native American",
-"Cabaret",
-"New Wave",
-"Psychadelic",
-"Rave",
-"Showtunes",
-"Trailer",
-"Lo-Fi",
-"Tribal",
-"Acid Punk",
-"Acid Jazz",
-"Polka",
-"Retro",
-"Musical",
-"Rock & Roll",
-"Hard Rock",
-"Folk",
-"Folk-Rock",
-"National Folk",
-"Swing",
-"Fast Fusion",
-"Bebob",
-"Latin",
-"Revival",
-"Celtic",
-"Bluegrass",
-"Avantgarde",
-"Gothic Rock",
-"Progressive Rock",
-"Psychedelic Rock",
-"Symphonic Rock",
-"Slow Rock",
-"Big Band",
-"Chorus",
-"Easy Listening",
-"Acoustic",
-"Humour",
-"Speech",
-"Chanson",
-"Opera",
-"Chamber Music",
-"Sonata",
-"Symphony",
-"Booty Brass",
-"Primus",
-"Porn Groove",
-"Satire",
-"Slow Jam",
-"Club",
-"Tango",
-"Samba",
-"Folklore",
-"Ballad",
-"Poweer Ballad",
-"Rhytmic Soul",
-"Freestyle",
-"Duet",
-"Punk Rock",
-"Drum Solo",
-"A Capela",
-"Euro-House",
-"Dance Hall"
-};
+	char     tag[INDEX_SPAN_TAG+1];
+	char   title[INDEX_SPAN_TITLE+1];
+	char  artist[INDEX_SPAN_ARTIST+1];
+	char   album[INDEX_SPAN_ALBUM+1];
+	char    year[INDEX_SPAN_YEAR+1];
+	char comment[INDEX_SPAN_COMMENT+1];
+	char genre;
+
+}ADT_Track_t;
+
+/**************************PROTOTIPOS**************************/
+
+status_t 	ADT_Track_create(ADT_Track_t **);
+status_t 	ADT_Track_destroy(ADT_Track_t **);
+status_t 	ADT_Track_load_from_mp3(ADT_Track_t *, FILE*);
+int 		ADT_Track_compare_by_title(const ADT_Track_t *, const ADT_Track_t *);
+int 		ADT_Track_compare_by_artist(const ADT_Track_t *, const ADT_Track_t *);
+int 		ADT_Track_compare_by_album(const ADT_Track_t *, const ADT_Track_t *);
+int 		ADT_Track_compare_by_year(const ADT_Track_t *, const ADT_Track_t *);
+status_t 	ADT_Track_print_as_CSV(ADT_Track_t *, const char *, FILE * );
+status_t 	ADT_Track_print_as_XML(ADT_Track_t *, size_t , FILE * );
+int 		strcmp_optimized(const char *, const char *);
+
+/**************************PROTOTIPOS**************************/
+
 
 #endif
