@@ -1,8 +1,8 @@
-#ifndef NOMBRE
-#define NOMBRE
+#ifndef TRACK
+#define TRACK
 
-#define MP3_HEADER_SIZE 	128
-#define NUL					'\0'
+#define MP3_HEADER_SIZE 		128
+#define NUL						'\0'
 
 #define PREFIJO_START_TAG 		0
 #define PREFIJO_SPAN_TAG 		3	
@@ -49,9 +49,9 @@ int 		ADT_Track_compare_by_title(const ADT_Track_t *track_1, const ADT_Track_t *
 int 		ADT_Track_compare_by_artist(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
 int 		ADT_Track_compare_by_album(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
 int 		ADT_Track_compare_by_year(const ADT_Track_t *track_1, const ADT_Track_t *track_2);
-int 		str_compare(const char *str_1, const char *str_2);
-status_t 	ADT_Track_print_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo);
-status_t 	ADT_Track_print_as_XML(ADT_Track_t *track, FILE *fo );
+int 		str_compare_optimized(const char *str_1, const char *str_2);
+status_t 	ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo);
+status_t 	ADT_Track_export_as_XML(ADT_Track_t *track, FILE *fo );
 int 		str_compare(const char *str_1, const char *str_2);
 
 typedef enum
@@ -62,7 +62,7 @@ typedef enum
 
 }status_t;
 
-char *genre_t[] =
+char *genre[] =
 {
 "Blues",
 "Classic Rock",
