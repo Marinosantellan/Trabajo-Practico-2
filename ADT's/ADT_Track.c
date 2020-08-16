@@ -128,7 +128,7 @@ int ADT_Track_compare_by_year(const ADT_Track_t *track_1, const ADT_Track_t *tra
 	return str_compare(track_1->year, track_2->year);
 }	
 
-int str_compare(const char *str_1, const char *str_2)
+int str_compare_optimized(const char *str_1, const char *str_2)
 {
 	char char_1, char_2;
 	size_t i;
@@ -167,19 +167,19 @@ int str_compare(const char *str_1, const char *str_2)
 	return 0;
 }
 
-status_t ADT_Track_print_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo)
+status_t ADT_Track_export_as_CSV(ADT_Track_t *track, const char *delimiter, FILE * fo)
 {
 	if(track == NULL || fo == NULL)
 	{
 		return ERROR_NULL_POINTER;
 	}
 
-	fprintf(fo, "%s%c%s%c%s%c%s",track->title,*delimiter,track->artist,*delimiter,genre_t[track->genre],*delimiter,track->year);
+	fprintf(fo, "%s%c%s%c%s%c%s",track->title,*delimiter,track->artist,*delimiter,genre[track->genre],*delimiter,track->year);
 
 	return OK;
 }
 
-status_t ADT_Track_print_as_XML(ADT_Track_t *track, FILE *fo )
+status_t ADT_Track_export_as_XML(ADT_Track_t *track, FILE *fo )
 {	
 	if(track == NULL || fo == NULL)
 	{
@@ -189,7 +189,7 @@ status_t ADT_Track_print_as_XML(ADT_Track_t *track, FILE *fo )
 	fprintf(fo,"	%s", TAG_START_TRACK);
 	fprintf(fo, "		%s%s%s", TAG_START_TITLE, track->title, TAG_END_TITLE);
 	fprintf(fo, "		%s%s%s", TAG_START_ARTIST, track->artist, TAG_END_ARTIST );
-	fprintf(fo, "		%s%s%s", TAG_START_GENRE, genre_t[track->genre], TAG_END_GENRE);
+	fprintf(fo, "		%s%s%s", TAG_START_GENRE, genre[track->genre], TAG_END_GENRE);
 	fprintf(fo, "		%s%s%s", TAG_START_YEAR, track->year, TAG_END_YEAR);
 	fprintf(fo, "	%s", TAG_END_TRACK);
 
