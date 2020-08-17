@@ -17,7 +17,7 @@ process_mp3(char* argv[], ADT_Vector_t** , format_t* , FILE* )
 
 
 	
-	}//ACA YA TENEMOS EL VECTOR CON TODOS LOS INDICES MP3 CARGADOS PEERFECTOOO REY.
+	}
 
 	load_mp3( char* argv[] , ADT_Vector_t**)
 	{
