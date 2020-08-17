@@ -1,48 +1,37 @@
 #include <stdio.h>
-
-
-void (*printers[MAX_PRINTERS]) (const void * , void *, FILE *) = 
-{
-	ADT_Track_print_as_csv,
-	ADT_Track_print_as_xml
-};
-
-
-typedef enum = 
-{
-	FMT_CSV,
-	FMT_XML
-
-}	format_t;
-
-typedef enum = 
-{
-	SORT_BY_ARTIST,
-	SORT_BY_GENRE,
-	SORT_BY_NAME,
-	SORT_BY_YEAR
-
-} smode_t;
-
-
+#include "vector.h"
+#include "track.h"
 
 int main(int argc, char *argv[])
 {
 	status_t st;
-	comparator_t fcomparator;
-	printer_t 	 fprinter;
-	destructor_t fdestructor;
-	format_t	 format;
+	char *name_fo_reference;
+	char *sort_reference;
+	char *fmt_reference;
+	setting_t settings;
+
 	ADT_Vector_t *vector;
 	FILE *fo; 
+	
 
-	if((st = validate_cla( argc, argv)) != OK)
+	if((st = validate_cla(argc, argv, &fmt_reference, &sort_reference, &name_fo)) != OK)
 	{
 		show_error(st);
 		return st;	
+	} 
+
+	if((st = process_config(&settings, fmt_reference, sort_reference)) != OK)
+	{
+		show_error(st);
+		return st;
 	}
 
-	if((fo = fopen(argv[CMD_ARG_NAME_OUTPUT_FILE], "wt")) == NULL)
+
+
+
+
+
+	if((fo = fopen(name_fo, "wt")) == NULL)
 	{
 		st = ERROR_OPENING_FILE;
 		show_error(st);
@@ -53,15 +42,13 @@ int main(int argc, char *argv[])
 	{
 		show_error(st);
 		return st;
-	}	
-
-	if((st = process_input(argv, &fcomparator, &fprinter, &format)) != OK)
+	}
+	/*if((st = process_input(argv, &fcomparator, &fprinter, &format)) != OK)
 	{
 		show_error(st);
 		return st;
-	}
-
-	if((st = set_vector_config(vector, fprinter , fcomparator, fdestructor)) != OK)
+	}*/
+	if((st = set_Vector_config(vector, printers[format], comparators[smode], ADT_Track_destroy)) != OK)
 	{
 		show_error(st);
 		return st;
@@ -86,4 +73,66 @@ int main(int argc, char *argv[])
 	}
 
 	return EXIT_SUCCESS;
+}
+
+status_t process_cla(int argc, char *argv, char **fmt_reference, char **sort_reference, char **name_fo)
+{
+	size_t i;
+
+	if(argv == NULL)
+	{
+		return ERROR_NULL_POINTER;
+	}
+
+	if(argc < MIN_ARGS)
+	{
+		return ERROR_INVALID_INVOCATION;
+	}
+
+	for(i = 1; i < MIN_ARGS; i += 2)
+	{
+		if(!strcmp(argv[i],CMD_ARG_FMT_TOKEN))
+		{
+			*fmt_reference = argv[i+1];
+		}
+		else if(!strcmp(argv[i], CMD_ARG_SORT_TOKEN))
+		{
+			*sort_reference = argv[i+1];
+		}
+		else if(!strcmp(argv[i], CMD_ARG_OUTPUT_FILE_TOKEN))
+		{
+			*name_fo = argv[i+1];
+		}
+		else 
+		{
+			return ERROR_INVALID_INVOCATION;
+		}	
+	}
+	return OK;
+}
+
+
+status_t set_Vector_config(ADT_Vector_t *vector, printer_t printer, comparator_t comparator, destructor_t destructor)
+{
+	if(vector == NULL)
+	{
+		return ERROR_NULL_POINTER;
+	}
+
+	if((st = ADT_Vector_set_printer(vector, printer)) != OK)
+	{
+		return st;
+	}
+
+	if((st = ADT_Vector_set_comparator(vector, comparator)) != OK)
+	{
+		return st;
+	}
+
+	if((st = ADT_Vector_set_destructor(vector, destructor)) != OK)
+	{
+		return st;
+	}
+	
+	return OK;
 }
